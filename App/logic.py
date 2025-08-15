@@ -26,6 +26,7 @@
 
 import csv
 import os
+import time
 
 # TODO Importar la librería para el manejo de listas
 
@@ -65,12 +66,15 @@ def load_data(catalog):
     Carga los datos de los archivos y cargar los datos en la
     estructura de datos
     """
+    start_time = getTime()
     books, authors = load_books(catalog)
     # TODO Complete la carga de los tags
     # TODO Complete la carga de los book_tags
-    # TODO Añada
-    return books, authors
-    # pass
+    # TODO Añada los parámetros de retoro necesarios
+    end_time = getTime()
+    tiempo_transcurrido = deltaTime(end_time, start_time)
+    return books, authors, tiempo_transcurrido
+
 
 
 def load_books(catalog):
@@ -132,21 +136,29 @@ def get_best_book(catalog):
 
     :return: El libro con el mejor rating
     """
+    start_time = getTime()
+    best_book = None
     # TODO Implementar la función del mejor libro por rating
-    return None
+    end_time = getTime()
+    tiempo_transcurrido = deltaTime(end_time, start_time)
+    return best_book, tiempo_transcurrido
 
 
 def count_books_by_tag(catalog, tag):
     """
-    Retorna la número de libros que fueron etiquetados con el tag dado
+    Retorna el número de libros que fueron etiquetados con el tag dado
 
     :param catalog: El catalogo de estructuras del laboratorio
     :param tag: El tag que se desea buscar
 
     :return: El número de libros que fueron etiquetados con el tag dado
     """
+    start_time = getTime()
+    resultado = 0
     # TODO Implementar la función de conteo de libros por tag
-    pass
+    end_time = getTime()
+    tiempo_transcurrido = deltaTime(end_time, start_time)
+    return resultado, tiempo_transcurrido
 
 
 # Funciones para agregar informacion al catalogo
@@ -292,3 +304,20 @@ def compare_tag_names(name, tag):
 
 def compare_ratings(book1, book2):
     return (float(book1['average_rating']) > float(book2['average_rating']))
+
+
+#  -------------------------------------------------------------
+# Funciones utilizadas para obtener memoria y tiempo
+#  -------------------------------------------------------------
+
+def getTime():
+    """
+    Devuelve el instante tiempo de procesamiento en milisegundos
+    """
+    return float(time.perf_counter() * 1000)
+
+def deltaTime(end, start):
+    """
+    Devuelve la diferencia entre tiempos de procesamiento muestreados
+    """
+    return float(end - start)
