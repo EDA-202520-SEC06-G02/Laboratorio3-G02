@@ -61,8 +61,8 @@ def load_data(control):
     """
     Solicita al controlador que cargue los datos en el modelo
     """
-    books, authors, tags, book_tags = logic.load_data(control)
-    return books, authors, tags, book_tags
+    books, authors, tags, book_tags, tiempo_transcurrido = logic.load_data(control)
+    return books, authors, tags, book_tags, tiempo_transcurrido
 
 
 def print_author_data(author):
@@ -108,26 +108,30 @@ def main():
         inputs = input('Seleccione una opción para continuar\n')
         if int(inputs[0]) == 1:
             print("Cargando información de los archivos ....")
-            bk, at, tg, bktg = load_data(control)
+            bk, at, tg, bktg, tiempo = load_data(control)
             print('Libros cargados: ' + str(bk))
             print('Autores cargados: ' + str(at))
             print('Géneros cargados: ' + str(tg))
             print('Asociación de Géneros a Libros cargados: ' +
                   str(bktg))
+            print('**Tiempo de carga**: ' + str(tiempo) + ' segundos')
 
         elif int(inputs[0]) == 2:
-            books = logic.get_best_book(control)
+            books, tiempo = logic.get_best_book(control)
             print_best_book(books)
+            print('**Tiempo de carga** ' + str(tiempo) + ' segundos')
 
         elif int(inputs[0]) == 3:
             authorname = input("Nombre del autor a buscar: ")
-            author = logic.get_books_by_author(control, authorname)
+            author, tiempo = logic.get_books_by_author(control, authorname)
             print_author_data(author)
+            print('**Tiempo de carga** ' + str(tiempo) + ' segundos')
 
         elif int(inputs[0]) == 4:
             label = input("Etiqueta a buscar: ")
-            book_count = logic.count_books_by_tag(control, label)
+            book_count, tiempo = logic.count_books_by_tag(control, label)
             print('Se encontraron: ', book_count, ' Libros')
+            print('**Tiempo de carga** ' + str(tiempo) + ' segundos')
 
         elif int(inputs[0]) == 0:
             working = False
