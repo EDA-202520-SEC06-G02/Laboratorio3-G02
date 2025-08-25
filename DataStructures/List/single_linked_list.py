@@ -133,5 +133,74 @@ def remove_last(my_list):
 
     elem = my_list["last"]["info"]
     prev["next"] = None
+    my_list["last"] = prev
+    my_list["size"] -= 1
+    return elem
+
+def insert_element(my_list, element, pos):
+    """Inserta un elemento en la posición dada"""
+    if pos < 0 or pos > my_list["size"]:
+        return None
+
+    new_node = {"info": element, "next": None}
+
+    if pos == 0:
+        return add_first(my_list, element)
+    elif pos == my_list["size"]:
+        return add_last(my_list, element)
+
+    prev = my_list["first"]
+    for _ in range(pos - 1):
+        prev = prev["next"]
+
+    new_node["next"] = prev["next"]
+    prev["next"] = new_node
+    my_list["size"] += 1
+    return element
+
+def change_info(my_list, pos, element):
+    """Cambia el valor de un nodo en la posición dada"""
+    if pos < 0 or pos >= my_list["size"]:
+        return None
+    node = my_list["first"]
+    for _ in range(pos):
+        node = node["next"]
+    node["info"] = element
+    return element
+
+def exchange(my_list, pos1, pos2):
+    """Intercambia los valores de dos posiciones"""
+    if pos1 < 0 or pos1 >= my_list["size"] or pos2 < 0 or pos2 >= my_list["size"]:
+        return None
+
+    node1 = my_list["first"]
+    for _ in range(pos1):
+        node1 = node1["next"]
+
+    node2 = my_list["first"]
+    for _ in range(pos2):
+        node2 = node2["next"]
+
+    node1["info"], node2["info"] = node2["info"], node1["info"]
+    return True
+
+def sub_list(my_list, pos, num):
+    """Retorna una sublista desde pos con num elementos"""
+    if pos < 0 or pos >= my_list["size"]:
+        return None
+
+    new_list = {"first": None, "last": None, "size": 0}
+
+    node = my_list["first"]
+    for _ in range(pos):
+        node = node["next"]
+
+    for _ in range(num):
+        if node is None:
+            break
+        add_last(new_list, node["info"])
+        node = node["next"]
+
+    return new_list
 
 
