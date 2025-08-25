@@ -20,3 +20,25 @@ def is_present(my_list, element, cmp_function):
         if keyexist:
             return keypos
     return -1
+
+def add_first(my_list, element):
+    """
+    Agrega un elemento al inicio de la lista.
+    """
+    my_list["elementos"].insert(0, element)
+    my_list["size"] += 1
+
+
+def add_last(my_list, element):
+    """
+    Agrega un elemento al final de la lista.
+    """
+    my_list["elementos"].append(element)
+    my_list["size"] += 1
+
+
+def size(my_list):
+    """
+    Retorna el tamaño de la lista.
+    """
+    return my_list["size"]
