@@ -29,8 +29,8 @@ from operator import lt
 import os
 import time
 
-# TODO Importar la librería para el manejo de listas
-from DISClib.ADT import list as lt
+# TODO Importar la librería para el manejo de listas+
+from DataStructures.List import single_linked_list as lt
 from DataStructures.List import array_list as It
 
 data_dir = os.path.dirname(os.path.realpath('__file__')) + '/Data/'
