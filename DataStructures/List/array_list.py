@@ -20,3 +20,11 @@ def is_present(my_list, element, cmp_function):
         if keyexist:
             return keypos
     return -1
+
+def first_element(my_list):
+    if my_list["size"] == 0:
+        return None
+    else:
+        return my_list["elements"][0]
+    
+    
