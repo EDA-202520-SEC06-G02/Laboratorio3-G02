@@ -29,6 +29,7 @@ import os
 import time
 
 # TODO Importar la librería para el manejo de listas
+from DISClib.ADT import list as lt
 from DataStructures.List import array_list as It
 
 data_dir = os.path.dirname(os.path.realpath('__file__')) + '/Data/'
@@ -52,10 +53,13 @@ def new_logic():
         'book_tags': None
     }
 
-    catalog['books'] = lt.new_list()
+    catalog['books'] = lt.new_list("SINGLE_LINKED")
     # TODO Implemente la inicialización de la lista de autores
     # TODO Implemente la inicialización de la lista de tags
     # TODO Implemente la inicialización de la lista de asociación de libros y tags
+    catalog['authors'] = lt.new_list('SINGLE_LINKED') 
+    catalog['tags'] = lt.new_list('SINGLE_LINKED')    
+    catalog['book_tags'] = lt.new_list('SINGLE_LINKED')
     return catalog
 
 
