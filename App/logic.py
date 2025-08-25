@@ -25,6 +25,7 @@
  """
 
 import csv
+from operator import lt
 import os
 import time
 
@@ -69,12 +70,15 @@ def load_data(catalog):
     """
     start_time = getTime()
     books, authors = load_books(catalog)
+    tags = load_tags(catalog)
+    book_tags = load_books_tags(catalog)
+
     # TODO Complete la carga de los tags
     # TODO Complete la carga de los book_tags
     # TODO Añada los parámetros de retoro necesarios
     end_time = getTime()
     tiempo_transcurrido = deltaTime(end_time, start_time)
-    return books, authors, tiempo_transcurrido
+    return books, authors, tiempo_transcurrido, tags, book_tags
 
 
 
@@ -92,28 +96,20 @@ def load_books(catalog):
 
 
 def load_tags(catalog):
-    """
-    Carga todos los tags del archivo y los agrega a la lista de tags
 
-    :param catalog: El catalogo de estructuras del laboratorio
-
-    :return: El número de tags cargados
-    """
-    # TODO Implementar la carga de los tags
-    pass
-
+    tagsfile = data_dir + 'GoodReads/tags.csv'
+    input_file = csv.DictReader(open(tagsfile, encoding='utf-8'))
+    for tag in input_file:
+        add_tag(catalog, tag)
+    return lt.size(catalog['tags'])    
 
 def load_books_tags(catalog):
-    """
-    Carga la información que asocia tags con libros.
 
-    :param catalog: El catalogo de estructuras del laboratorio
-
-    :return: El número de book_tags cargados
-    """
-    # TODO Implementar la carga de los book_tags
-    pass
-
+    book_tags_file = data_dir + 'GoodReads/book_tags.csv'
+    input_file = csv.DictReader(open(book_tags_file, encoding='utf-8'))
+    for book_tag in input_file:
+        add_book_tag(catalog, book_tag)
+    return lt.size(catalog['book_tags'])
 
 # Funciones de consulta sobre el catálogo
 
